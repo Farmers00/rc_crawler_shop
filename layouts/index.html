@@ -5,7 +5,7 @@
     <section class="relative bg-rc-dark text-white py-20 lg:py-32">
         <div class="absolute inset-0 overflow-hidden opacity-50">
             <!-- Background Image -->
-            <img src="/images/background.png" alt="Hero Background" class="w-full h-full object-cover">
+            <img src="{{ "images/background.png" | relURL }}" alt="Hero Background" class="w-full h-full object-cover">
         </div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
@@ -42,7 +42,7 @@
             <div class="relative w-full max-w-4xl mx-auto h-64 md:h-96 rounded-lg overflow-hidden shadow-2xl" id="slideshow-container">
                 {{ range $index, $slide := .Site.Data.slideshow }}
                 <div class="slide absolute inset-0 transition-opacity duration-1000 ease-in-out {{ if ne $index 0 }}hidden opacity-0{{ end }}">
-                    <img src="{{ $slide.url }}" alt="{{ $slide.caption }}" class="w-full h-full object-cover">
+                    <img src="{{ $slide.url | relURL }}" alt="{{ $slide.caption }}" class="w-full h-full object-cover">
                     <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
                         <p class="text-lg font-semibold">{{ $slide.caption }}</p>
                     </div>
@@ -150,7 +150,7 @@
             
             <!-- Owners Group Photo -->
             <div class="mb-10 flex justify-center">
-                <img src="/images/owners.png" alt="RC RC Owners" class="rounded-lg shadow-lg max-w-full h-auto max-h-96 object-cover">
+                <img src="{{ "images/owners.png" | relURL }}" alt="RC RC Owners" class="rounded-lg shadow-lg max-w-full h-auto max-h-96 object-cover">
             </div>
 
             <div class="flex flex-wrap justify-center gap-8">
