@@ -1,0 +1,7 @@
+baseURL = 'https://rc-rc-colorado.com/'
+languageCode = 'en-us'
+title = 'RC RC Colorado'
+theme = ''
+
+[params]
+  description = "The World's Greatest 1/18-Scale Crawler Course"

@@ -1,0 +1,171 @@
+{{ define "main" }}
+<div class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    
+    <!-- Hero Section -->
+    <section class="relative bg-rc-dark text-white py-20 lg:py-32">
+        <div class="absolute inset-0 overflow-hidden opacity-50">
+            <!-- Background Image -->
+            <img src="/images/background.png" alt="Hero Background" class="w-full h-full object-cover">
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+                {{ .Title }}
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
+                {{ .Params.description }}
+            </p>
+            <a href="#location" class="inline-block bg-rc-red hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                Find Us in Chapel Hills Mall
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-base text-rc-red font-semibold tracking-wide uppercase">About Us</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                    Experience the Crawl
+                </p>
+                <div class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-300 lg:mx-auto prose dark:prose-invert text-left">
+                {{ .Content }}
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slideshow Section -->
+    <section id="gallery" class="py-12 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-8">Course Highlights</h2>
+            <div class="relative w-full max-w-4xl mx-auto h-64 md:h-96 rounded-lg overflow-hidden shadow-2xl" id="slideshow-container">
+                {{ range $index, $slide := .Site.Data.slideshow }}
+                <div class="slide absolute inset-0 transition-opacity duration-1000 ease-in-out {{ if ne $index 0 }}hidden opacity-0{{ end }}">
+                    <img src="{{ $slide.url }}" alt="{{ $slide.caption }}" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+                        <p class="text-lg font-semibold">{{ $slide.caption }}</p>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+            <p class="mt-4 text-gray-600 dark:text-gray-400">
+                Check out more on our <a href="https://www.instagram.com/rc_rc_colorado/" target="_blank" class="text-pink-600 underline hover:text-pink-500">Instagram</a>!
+            </p>
+        </div>
+    </section>
+
+    <!-- Info Section: Hours & Location -->
+    <section id="hours" class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Hours -->
+                <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-lg shadow-md border-l-4 border-rc-red">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Hours of Operation</h3>
+                    <ul class="space-y-4 text-lg text-gray-600 dark:text-gray-300">
+                        <li class="flex justify-between border-b border-gray-200 dark:border-gray-600 pb-2">
+                            <span class="font-medium">Mon - Sat:</span>
+                            <span>{{ .Params.hours.monday_saturday }}</span>
+                        </li>
+                        <li class="flex justify-between border-b border-gray-200 dark:border-gray-600 pb-2">
+                            <span class="font-medium">Sunday:</span>
+                            <span>{{ .Params.hours.sunday }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Location -->
+                <div id="location" class="bg-gray-50 dark:bg-gray-700 p-8 rounded-lg shadow-md border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Location</h3>
+                    <address class="not-italic text-lg text-gray-600 dark:text-gray-300 space-y-2">
+                        <p class="font-bold">{{ .Params.location.address }}</p>
+                        <p class="text-sm italic">{{ .Params.location.notes }}</p>
+                    </address>
+                    <div class="mt-6">
+                        <a href="{{ .Params.location.map_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                            Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="py-16 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl leading-9 font-extrabold text-gray-900 dark:text-white sm:text-4xl sm:leading-10">
+                    Top 5 Leaderboard
+                </h2>
+                <p class="mt-4 text-lg leading-6 text-gray-500 dark:text-gray-400">
+                    The best crawlers on the mountain this month!
+                </p>
+            </div>
+            
+            <div class="flex flex-col">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 dark:border-gray-700 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-800">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Rank</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Driver</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Vehicle</th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    {{ range $index, $entry := .Site.Data.leaderboard }}
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-150">
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900 dark:text-white">
+                                            #{{ add $index 1 }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ $entry.name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                                            {{ $entry.vehicle }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-right font-bold text-rc-red dark:text-red-400">
+                                            {{ $entry.score }}
+                                        </td>
+                                    </tr>
+                                    {{ end }}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Owners Section -->
+    <section id="owners" class="py-16 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-8">Meet the Owners</h2>
+            
+            <!-- Owners Group Photo -->
+            <div class="mb-10 flex justify-center">
+                <img src="/images/owners.png" alt="RC RC Owners" class="rounded-lg shadow-lg max-w-full h-auto max-h-96 object-cover">
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8">
+                {{ range .Params.owners }}
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 shadow-md w-full max-w-xs transform hover:-translate-y-1 transition duration-300">
+                    <div class="w-24 h-24 mx-auto bg-gray-300 rounded-full mb-4 flex items-center justify-center text-3xl">
+                        👤 <!-- Placeholder avatar -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ .name }}</h3>
+                    <p class="text-rc-red dark:text-red-400 font-medium">{{ .role }}</p>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+</div>
+{{ end }}
